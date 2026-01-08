@@ -1,0 +1,88 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+<section class="login_box_area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img" style="background-image: url('{% static 'img/login-bg.jpg' %}'); background-size: cover; height: 100%; border-radius: 10px; position: relative;">
+                    <div class="hover" style="background: rgba(0,0,0,0.7); padding: 30px; border-radius: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; text-align: center;">
+                        <h4 class="text-white mb-4">New to our website?</h4>
+                        <p class="text-white mb-4">Join our community of eco-conscious individuals and start your recycling journey today.</p>
+                        <a class="button button-account" href="/UserRegister" style="background: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner" style="padding: 40px; box-shadow: 0 0 20px rgba(0,0,0,0.1); border-radius: 10px;">
+                    <h3 style="margin-bottom: 30px; color: #333; font-weight: bold; text-align: center;">Log in to enter</h3>
+                    
+                    {% if message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    
+                    <form class="row login_form" action="" method="post" id="contactForm">
+                        {% csrf_token %}
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" style="padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" style="padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <select class="form-control" id="usertype" name="usertype" style="padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; height: auto;">
+                                <option value="">Select user type</option>
+                                <option value="user">User</option>
+                                <option value="collector">Collector</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="creat_account d-flex align-items-center">
+                                <input type="checkbox" id="f-option2" name="selector" style="margin-right: 10px;">
+                                <label for="f-option2" style="margin-bottom: 0;">Keep me logged in</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="button button-login w-100" style="background: #4CAF50; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;">Log In</button>
+                            <a href="#" style="display: block; text-align: center; margin-top: 15px; color: #4CAF50;">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .login_form_inner h3 {
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    .login_form_inner h3:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: #4CAF50;
+    }
+    
+    .button-login:hover {
+        background: #3e8e41 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .button-account:hover {
+        background: #3e8e41 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}

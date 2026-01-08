@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+  <link rel="shortcut icon" href="{% static './img/fav.png' %}" type="image/x-icon">  
+  <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style-admin.css' %}">  
+  <title>WM</title>
+  <base href="/admin/">
+</head>
+<body class="bg-gray-100">
+
+<!-- start navbar -->
+<div class="md:w-full flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
+    <div class="flex-none w-56 flex flex-row items-center">
+      <img src="{% static 'img/logo.png' %}" class="w-10">
+      <strong class="capitalize ml-1">WM</strong>
+    </div>
+</div>
+<!-- end navbar -->
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success mb-5">
+  {{ message }}  
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- start wrapper -->
+<div class="h-screen flex ">
+  <!-- start sidebar -->
+  <div class="flex flex-col bg-white border-r border-gray-300 p-6 w-64 h-screen">
+    <div class="flex flex-col">
+      <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">Homes</p>
+      <a href="/admin" class="mb-3 font-medium text-sm hover:text-teal-600">HOME</a>
+      
+      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">Category</p>
+      <a href="/admin/AddCategory" class="mb-3 font-medium text-sm hover:text-teal-600">ADD CATEGORY</a>
+      <a href="/admin/ViewCategory" class="mb-3 font-medium text-sm hover:text-teal-600">VIEW CATEGORY</a>
+      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">Orders</p>
+      <a href="/admin/ViewOrders" class="mb-3 font-medium text-sm hover:text-teal-600">VIEW ORDERS</a>
+      <a href="/admin/OrdersDelivered" class="mb-3 font-medium text-sm hover:text-teal-600">VIEW ORDERS-Delivered</a>
+      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">Complaints</p>
+      <a href="/admin/ViewComplaints" class="mb-3 font-medium text-sm hover:text-teal-600">VIEW COMPLAINTS</a>
+      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">Collection</p>
+      <a href="/admin/PickupRequest" class="mb-3 font-medium text-sm hover:text-teal-600">PICKUP REQUESTS</a>
+      <a href="/admin/CollectionHistory" class="mb-3 font-medium text-sm hover:text-teal-600">COLLECTION HISTORY</a>
+      <a href="/admin/viewuser" class="mb-3 font-medium text-sm hover:text-teal-600">USERS</a>
+      
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">Location</p>
+      <a href="/admin/ViewLocations" class="mb-3 font-medium text-sm hover:text-teal-600">VIEW LOCATIONS</a>
+      <a href="/admin/AddLocation" class="mb-3 font-medium text-sm hover:text-teal-600">ADD LOCATION</a>
+    </div>
+  </div>
+  <!-- end sidebar -->
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

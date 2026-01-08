@@ -1,0 +1,26 @@
+[
+  {
+    "model": "waste.products",
+    "pk": 1,
+    "fields": {
+      "name": "Recycled Bottle Pack",
+      "rate": 50,
+      "point": 5,
+      "desc": "Pack of recycled bottles",
+      "image": "",
+      "status": 1
+    }
+  },
+  {
+    "model": "waste.products",
+    "pk": 2,
+    "fields": {
+      "name": "Eco Bag",
+      "rate": 120,
+      "point": 12,
+      "desc": "Reusable eco-friendly bag",
+      "image": "",
+      "status": 1
+    }
+  }
+]

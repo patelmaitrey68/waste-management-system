@@ -1,0 +1,105 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-margin">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feedback-form-wrapper" style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                    <h2 class="text-center mb-4">Share Your Feedback</h2>
+                    <p class="text-center mb-5">We value your opinion and would love to hear about your experience with our waste management system.</p>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <form action="{% url 'feedback' %}" method="POST" class="feedback-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required
+                                style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required
+                                style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required
+                                style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block"
+                            style="background-color: #4CAF50; border: none; padding: 15px; border-radius: 5px; font-weight: 600; margin-top: 20px;">
+                            Submit Feedback
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .feedback-form-wrapper {
+        transition: transform 0.3s ease;
+    }
+
+    .feedback-form-wrapper:hover {
+        transform: translateY(-5px);
+    }
+
+    .form-control:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    }
+
+    .btn-primary:hover {
+        background-color: #3e8e41 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    label {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .alert {
+        border-radius: 5px;
+    }
+</style>
+
+<script>
+    // Form validation
+    document.querySelector('.feedback-form').addEventListener('submit', function(e) {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        if (!name || !email || !subject || !message) {
+            e.preventDefault();
+            alert('Please fill in all fields');
+        }
+    });
+</script>
+{% endblock %} 

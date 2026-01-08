@@ -1,0 +1,71 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- start content -->
+<div class="bg-gray-100 flex-1 p-6">
+    <div class="bg-white border rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">Collectors List</h2>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 border-b">Name</th>
+                        <th class="py-2 px-4 border-b">Email</th>
+                        <th class="py-2 px-4 border-b">Phone</th>
+                        <th class="py-2 px-4 border-b">Address</th>
+                        <th class="py-2 px-4 border-b">Pincode</th>
+                        <th class="py-2 px-4 border-b">Status</th>
+                        <th class="py-2 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for collector in collectors %}
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ collector.name }}</td>
+                        <td class="py-2 px-4 border-b">{{ collector.collector_id.email }}</td>
+                        <td class="py-2 px-4 border-b">{{ collector.phone }}</td>
+                        <td class="py-2 px-4 border-b">{{ collector.address }}</td>
+                        <td class="py-2 px-4 border-b">{{ collector.pincode }}</td>
+                        <td class="py-2 px-4 border-b">
+                            {% if collector.status == 0 %}
+                                <span class="bg-yellow-200 text-yellow-800 py-1 px-2 rounded-full text-xs">Pending</span>
+                            {% elif collector.status == 1 %}
+                                <span class="bg-green-200 text-green-800 py-1 px-2 rounded-full text-xs">Approved</span>
+                            {% else %}
+                                <span class="bg-red-200 text-red-800 py-1 px-2 rounded-full text-xs">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="flex space-x-2">
+                                {% if collector.status == 0 %}
+                                <a href="{% url 'admin_approve_collector' collector.id %}" 
+                                   class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded text-xs">
+                                    Approve
+                                </a>
+                                <a href="{% url 'admin_reject_collector' collector.id %}" 
+                                   class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded text-xs">
+                                    Reject
+                                </a>
+                                {% endif %}
+                                <a href="{% url 'admin_delete_collector' collector.id %}" 
+                                   class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded text-xs"
+                                   onclick="return confirm('Are you sure you want to delete this collector?')">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="py-4 text-center text-gray-500">No collectors found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end content -->
+{% endblock %}
